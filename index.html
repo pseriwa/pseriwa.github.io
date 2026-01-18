@@ -3,177 +3,1385 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Priyanka Seriwala | Senior Data Engineer</title>
-
+    <title>Priyanka Seriwala | Data Engineer</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <style>
         :root {
             --bg-main: #0a0a1a;
             --bg-card: #0f0f24;
             --accent-1: #00d4ff;
             --accent-2: #9d4edd;
-            --accent-3: #20c997;
-            --text-primary: #ffffff;
-            --text-secondary: #94a3b8;
+            --accent-3: #f72585;
+            --accent-4: #4361ee;
+            --accent-5: #20c997;
+            --text-light: #f1f5f9;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        code, .mono {
+            font-family: 'Fira Code', monospace;
+        }
+
+        .montserrat {
+            font-family: 'Montserrat', sans-serif;
         }
 
         body {
             background: var(--bg-main);
-            color: var(--text-primary);
-            font-family: 'Poppins', sans-serif;
+            color: var(--text-light);
             overflow-x: hidden;
         }
 
-        /* 🔽 REDUCED SECTION SPACING */
-        section {
-            padding-top: 80px !important;
-            padding-bottom: 80px !important;
-        }
-
-        /* Background Effects */
-        .bg-effects {
+        /* Animated Data Flow Background */
+        .data-flow-bg {
             position: fixed;
-            inset: 0;
-            background:
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
                 radial-gradient(ellipse at 20% 30%, rgba(0, 212, 255, 0.08) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 70%, rgba(157, 78, 221, 0.08) 0%, transparent 50%);
+                radial-gradient(ellipse at 80% 70%, rgba(157, 78, 221, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(32, 201, 151, 0.05) 0%, transparent 60%);
             pointer-events: none;
             z-index: 0;
         }
 
-        .glass-card {
-            background: rgba(15, 15, 36, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
+        /* Data Grid Pattern */
+        .data-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 212, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 212, 255, 0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            z-index: 0;
         }
 
+        /* Glassmorphism Cards */
+        .glass-card {
+            background: linear-gradient(135deg, rgba(15, 15, 36, 0.9), rgba(10, 10, 26, 0.95));
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 212, 255, 0.1);
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(0, 212, 255, 0.3);
+            box-shadow: 
+                0 12px 40px rgba(0, 0, 0, 0.4),
+                0 0 30px rgba(0, 212, 255, 0.1),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .glass-button {
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+
+        .glass-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 50px rgba(0, 212, 255, 0.5);
+        }
+
+        .glass-circle {
+            background: linear-gradient(135deg, rgba(15, 15, 36, 0.9), rgba(10, 10, 26, 0.95));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 212, 255, 0.15);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .glass-circle:hover {
+            border-color: rgba(0, 212, 255, 0.5);
+            box-shadow: 0 0 25px rgba(0, 212, 255, 0.3);
+        }
+
+        /* Gradient Text */
         .gradient-text {
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-5));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .gradient-text-purple {
+            background: linear-gradient(135deg, var(--accent-2), var(--accent-3));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Floating Animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .floating { animation: float 5s ease-in-out infinite; }
+
+        /* Data Pipeline Animation */
+        .pipeline-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            padding: 30px;
+        }
+
+        .pipeline-node {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(157, 78, 221, 0.1));
+            border: 2px solid rgba(0, 212, 255, 0.3);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .pipeline-node:hover {
+            border-color: var(--accent-1);
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.4);
+            transform: scale(1.1);
+        }
+
+        .pipeline-arrow {
+            width: 40px;
+            height: 3px;
             background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+            position: relative;
+            animation: dataFlow 1.5s ease-in-out infinite;
+        }
+
+        .pipeline-arrow::after {
+            content: '';
+            position: absolute;
+            right: -8px;
+            top: -5px;
+            border: 6px solid transparent;
+            border-left-color: var(--accent-2);
+        }
+
+        @keyframes dataFlow {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        /* Database Cylinder */
+        .db-cylinder {
+            width: 60px;
+            height: 80px;
+            background: linear-gradient(180deg, var(--accent-1), var(--accent-2));
+            border-radius: 50% / 20%;
+            position: relative;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+        }
+
+        .db-cylinder::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 20%;
+            background: linear-gradient(180deg, rgba(255,255,255,0.3), transparent);
+            border-radius: 50%;
+        }
+
+        /* Data Stream Animation */
+        .data-stream {
+            position: absolute;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(180deg, transparent, var(--accent-1), transparent);
+            animation: stream 2s linear infinite;
+        }
+
+        @keyframes stream {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+
+        /* Skill Cards with Data Theme */
+        .skill-category {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-category::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-1), var(--accent-2), transparent);
+            animation: skillScan 3s linear infinite;
+        }
+
+        @keyframes skillScan {
+            to { left: 100%; }
+        }
+
+        /* Tech Pills */
+        .tech-pill {
+            display: inline-block;
+            padding: 8px 16px;
+            margin: 4px;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.05), rgba(157, 78, 221, 0.05));
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 25px;
+            font-size: 13px;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .tech-pill:hover {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(157, 78, 221, 0.15));
+            border-color: var(--accent-1);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+            transform: translateY(-3px) scale(1.05);
+        }
+
+        .tech-pill.azure { border-color: #0089d6; }
+        .tech-pill.azure:hover { box-shadow: 0 0 20px rgba(0, 137, 214, 0.5); }
+        .tech-pill.aws { border-color: #ff9900; }
+        .tech-pill.aws:hover { box-shadow: 0 0 20px rgba(255, 153, 0, 0.5); }
+        .tech-pill.db { border-color: #20c997; }
+        .tech-pill.db:hover { box-shadow: 0 0 20px rgba(32, 201, 151, 0.5); }
+        .tech-pill.spark { border-color: #e25a1c; }
+        .tech-pill.spark:hover { box-shadow: 0 0 20px rgba(226, 90, 28, 0.5); }
+        .tech-pill.python { border-color: #3776ab; }
+        .tech-pill.python:hover { box-shadow: 0 0 20px rgba(55, 118, 171, 0.5); }
+
+        /* Data Warehouse Visual */
+        .warehouse-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            padding: 20px;
+        }
+
+        .warehouse-cell {
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(157, 78, 221, 0.1));
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            text-align: center;
+            padding: 5px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .warehouse-cell:hover {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.3), rgba(157, 78, 221, 0.3));
+            transform: scale(1.1);
+            z-index: 10;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, var(--accent-1), var(--accent-2), var(--accent-5));
+            border-radius: 3px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -34px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            background: var(--accent-1);
+            border-radius: 50%;
+            box-shadow: 0 0 15px var(--accent-1);
+        }
+
+        /* Certificate Cards */
+        .cert-card {
+            background: linear-gradient(135deg, rgba(15, 15, 36, 0.95), rgba(10, 10, 26, 0.98));
+            border: 1px solid rgba(0, 212, 255, 0.1);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .cert-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            border-color: rgba(0, 212, 255, 0.4);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3), 0 0 30px rgba(0, 212, 255, 0.15);
+        }
+
+        /* ETL Process Visual */
+        .etl-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+
+        .etl-step {
+            padding: 15px 25px;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(157, 78, 221, 0.1));
+            border: 2px solid;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .etl-extract { border-color: var(--accent-1); }
+        .etl-transform { border-color: var(--accent-2); }
+        .etl-load { border-color: var(--accent-5); }
+
+        .etl-step:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px currentColor;
+        }
+
+        .etl-arrow {
+            font-size: 24px;
+            color: var(--accent-2);
+            animation: pulse 1s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* Stats Counter Animation */
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-5));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        /* Projects */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
-            margin-top: 40px;
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-main); }
+        ::-webkit-scrollbar-thumb { 
+            background: linear-gradient(180deg, var(--accent-1), var(--accent-2)); 
+            border-radius: 4px; 
         }
 
-        .project-card {
-            padding: 24px;
+        /* Nav Link */
+        .nav-link {
+            position: relative;
         }
 
-        .project-card ul {
-            margin-top: 12px;
-            padding-left: 18px;
-            color: var(--text-secondary);
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Experience Badge */
+        .exp-badge {
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            animation: badge-glow 2s ease-in-out infinite;
+        }
+
+        @keyframes badge-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(0, 212, 255, 0.4); }
+            50% { box-shadow: 0 0 40px rgba(0, 212, 255, 0.6); }
+        }
+
+        /* Data Particles */
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .data-particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--accent-1);
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: floatUp 15s infinite;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* Award Badge */
+        .award-badge {
+            background: linear-gradient(135deg, #ffd700, #ff8c00);
+            color: #000;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* Category Colors */
+        .cat-azure { background: rgba(0, 137, 214, 0.15); color: #00d4ff; border-color: rgba(0, 137, 214, 0.3); }
+        .cat-bigdata { background: rgba(226, 90, 28, 0.15); color: #e25a1c; border-color: rgba(226, 90, 28, 0.3); }
+        .cat-cloud { background: rgba(255, 153, 0, 0.15); color: #ff9900; border-color: rgba(255, 153, 0, 0.3); }
+
+        @media (max-width: 768px) {
+            .pipeline-container { flex-direction: column; }
+            .pipeline-arrow { 
+                width: 3px; 
+                height: 30px; 
+                transform: rotate(90deg);
+            }
+            .warehouse-grid { grid-template-columns: repeat(3, 1fr); }
         }
     </style>
 </head>
+<body class="min-h-screen">
+    <!-- Background Effects -->
+    <div class="data-flow-bg"></div>
+    <div class="data-grid"></div>
+    <div id="particles"></div>
 
-<body>
-<div class="bg-effects"></div>
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 py-4 px-4 md:px-8">
+        <div class="glass-card max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-xl md:text-2xl font-bold montserrat">
+                <span class="gradient-text">&lt;PS/&gt;</span>
+            </a>
+            
+            <button id="menuBtn" class="md:hidden glass-circle w-10 h-10 flex items-center justify-center">
+                <i class="fas fa-bars text-[#00d4ff]"></i>
+            </button>
 
-<!-- HERO (UNCHANGED) -->
-<section class="relative z-10 min-h-screen flex items-center justify-center text-center px-6">
-    <div>
-        <h1 class="text-5xl md:text-6xl font-bold mb-4">
-            Priyanka <span class="gradient-text">Seriwala</span>
-        </h1>
-        <p class="text-xl text-slate-400 mb-6">
-            Senior Data Engineer • Cloud • Big Data
-        </p>
-        <div class="flex justify-center gap-4">
-            <a href="#experience" class="px-6 py-3 rounded-full bg-cyan-400 text-black">View Experience</a>
-            <a href="#contact" class="px-6 py-3 rounded-full border border-cyan-400 text-cyan-400">Contact Me</a>
-        </div>
-    </div>
-</section>
-
-<!-- ABOUT -->
-<section id="about" class="relative z-10 px-6">
-    <div class="max-w-4xl mx-auto glass-card p-10 text-center">
-        <h2 class="text-3xl font-bold mb-6">
-            About <span class="gradient-text">Me</span>
-        </h2>
-        <p class="text-slate-400 leading-relaxed">
-            Data Engineer with 7 years of experience designing and optimizing scalable
-            data platforms across Azure and AWS ecosystems.
-        </p>
-    </div>
-</section>
-
-<!-- ✅ PROJECTS (NEW, MATCHING DESIGN) -->
-<section id="projects" class="relative z-10 px-6">
-    <div class="max-w-6xl mx-auto">
-        <h2 class="text-3xl font-bold text-center mb-10">
-            Featured <span class="gradient-text">Projects</span>
-        </h2>
-
-        <div class="projects-grid">
-            <div class="glass-card project-card">
-                <h3 class="text-xl font-semibold mb-2">IoT Data Platform Optimization</h3>
-                <p class="text-slate-400">
-                    Optimized enterprise IoT pipelines using Databricks, PySpark, and Snowflake.
-                </p>
-                <ul>
-                    <li>70% cloud cost reduction</li>
-                    <li>2× faster processing</li>
-                    <li>98% pipeline reliability</li>
-                </ul>
-            </div>
-
-            <div class="glass-card project-card">
-                <h3 class="text-xl font-semibold mb-2">AWS Batch Pipeline Optimization</h3>
-                <p class="text-slate-400">
-                    Refactored AWS Glue Spark jobs exceeding SLA.
-                </p>
-                <ul>
-                    <li>SLA reduced from 9h → 35 mins</li>
-                    <li>Improved scalability</li>
-                </ul>
+            <div class="hidden md:flex gap-8">
+                <a href="#home" class="nav-link hover:text-[#00d4ff] transition">Home</a>
+                <a href="#about" class="nav-link hover:text-[#00d4ff] transition">About</a>
+                <a href="#experience" class="nav-link hover:text-[#00d4ff] transition">Experience</a>
+                <a href="#skills" class="nav-link hover:text-[#00d4ff] transition">Skills</a>
+                <a href="#certifications" class="nav-link hover:text-[#00d4ff] transition">Certifications</a>
             </div>
         </div>
-    </div>
-</section>
 
-<!-- EXPERIENCE (UNCHANGED CONTENT, LESS SPACE) -->
-<section id="experience" class="relative z-10 px-6">
-    <div class="max-w-4xl mx-auto glass-card p-10">
-        <h2 class="text-3xl font-bold mb-6 text-center">
-            Professional <span class="gradient-text">Experience</span>
-        </h2>
-        <p class="text-slate-400 text-center">
-            ThoughtFocus • Ecolab • ZS Associates • IBM
-        </p>
-    </div>
-</section>
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden mt-4 glass-card max-w-7xl mx-auto p-6">
+            <div class="flex flex-col gap-4">
+                <a href="#home" class="hover:text-[#00d4ff] transition">Home</a>
+                <a href="#about" class="hover:text-[#00d4ff] transition">About</a>
+                <a href="#experience" class="hover:text-[#00d4ff] transition">Experience</a>
+                <a href="#skills" class="hover:text-[#00d4ff] transition">Skills</a>
+                <a href="#certifications" class="hover:text-[#00d4ff] transition">Certifications</a>
+            </div>
+        </div>
+    </nav>
 
-<!-- CONTACT -->
-<section id="contact" class="relative z-10 px-6">
-    <div class="max-w-4xl mx-auto glass-card p-10 text-center">
-        <h2 class="text-3xl font-bold mb-4">
-            Let’s <span class="gradient-text">Connect</span>
-        </h2>
-        <p class="text-slate-400 mb-4">
-            📧 priseri123@gmail.com
-        </p>
-        <p>
-            🔗 <a href="https://www.linkedin.com/in/priyanka-seriwala" class="text-cyan-400">LinkedIn</a>
-        </p>
-    </div>
-</section>
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center px-4 md:px-8 pt-24 relative z-10">
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+            <div class="order-2 lg:order-1">
+                <div class="flex items-center gap-3 mb-4 flex-wrap">
+                    <span class="exp-badge px-4 py-1 rounded-full text-sm font-medium text-black">6.5+ Years Experience</span>
+                    <span class="px-3 py-1 rounded-full text-xs border border-green-500/30 text-green-400 bg-green-500/10">🟢 Open to Opportunities</span>
+                </div>
+                
+                <p class="text-[#00d4ff] text-lg mb-2 font-medium mono">Hello, I'm</p>
+                <h1 class="text-4xl md:text-6xl font-bold mb-4 montserrat">
+                    <span class="gradient-text">Priyanka Seriwala</span>
+                </h1>
+                <h2 class="text-xl md:text-2xl text-[#94a3b8] mb-6">
+                    <span id="typewriter"></span><span class="animate-pulse text-[#00d4ff]">|</span>
+                </h2>
+                <p class="text-[#94a3b8] mb-6 leading-relaxed text-lg">
+                    <span class="text-white font-medium">Data Engineer</span> specializing in 
+                    <span class="text-[#00d4ff]">Enterprise Data Platforms</span>, 
+                    <span class="text-[#9d4edd]">Cloud Solutions</span>, and 
+                    <span class="text-[#20c997]">Big Data Technologies</span>. 
+                    Building scalable data pipelines across Azure, AWS & Snowflake.
+                </p>
 
-<footer class="py-6 text-center text-slate-500">
-    © Priyanka Seriwala
-</footer>
+                <!-- Quick Stats -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                    <div class="glass-card rounded-xl p-4 text-center">
+                        <p class="stat-number montserrat">6.5+</p>
+                        <p class="text-xs text-[#94a3b8]">Years Exp</p>
+                    </div>
+                    <div class="glass-card rounded-xl p-4 text-center">
+                        <p class="stat-number montserrat">4</p>
+                        <p class="text-xs text-[#94a3b8]">Companies</p>
+                    </div>
+                    <div class="glass-card rounded-xl p-4 text-center">
+                        <p class="stat-number montserrat">70%</p>
+                        <p class="text-xs text-[#94a3b8]">Cost Reduction</p>
+                    </div>
+                    <div class="glass-card rounded-xl p-4 text-center">
+                        <p class="stat-number montserrat">5+</p>
+                        <p class="text-xs text-[#94a3b8]">Certifications</p>
+                    </div>
+                </div>
 
+                <div class="flex flex-wrap gap-4 mb-8">
+                    <a href="#experience" class="glass-button px-8 py-3 text-black font-medium">
+                        <i class="fas fa-briefcase mr-2"></i>View Experience
+                    </a>
+                    <a href="mailto:priseri123@gmail.com" class="glass-card px-8 py-3 font-medium hover:text-[#00d4ff] transition">
+                        <i class="fas fa-envelope mr-2"></i>Contact Me
+                    </a>
+                </div>
+
+                <!-- Social Links -->
+                <div class="flex gap-4">
+                    <a href="https://www.linkedin.com/in/priyanka-seriwala" target="_blank" class="glass-circle w-12 h-12 flex items-center justify-center hover:text-[#0077b5] transition" title="LinkedIn">
+                        <i class="fab fa-linkedin text-xl"></i>
+                    </a>
+                    <a href="mailto:priseri123@gmail.com" class="glass-circle w-12 h-12 flex items-center justify-center hover:text-[#00d4ff] transition" title="Email">
+                        <i class="fas fa-envelope text-xl"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="order-1 lg:order-2 flex justify-center">
+                <div class="relative floating">
+                    <!-- Data Pipeline Visual -->
+                    <div class="glass-card p-8 rounded-3xl">
+                        <div class="pipeline-container flex-col md:flex-row">
+                            <div class="pipeline-node">
+                                <i class="fas fa-database text-2xl text-[#00d4ff]"></i>
+                                <span class="absolute -bottom-6 text-xs text-[#94a3b8]">Source</span>
+                            </div>
+                            <div class="pipeline-arrow hidden md:block"></div>
+                            <div class="pipeline-arrow md:hidden" style="transform: rotate(90deg); width: 3px; height: 30px;"></div>
+                            <div class="pipeline-node">
+                                <i class="fas fa-cogs text-2xl text-[#9d4edd]"></i>
+                                <span class="absolute -bottom-6 text-xs text-[#94a3b8]">Transform</span>
+                            </div>
+                            <div class="pipeline-arrow hidden md:block"></div>
+                            <div class="pipeline-arrow md:hidden" style="transform: rotate(90deg); width: 3px; height: 30px;"></div>
+                            <div class="pipeline-node">
+                                <i class="fas fa-warehouse text-2xl text-[#20c997]"></i>
+                                <span class="absolute -bottom-6 text-xs text-[#94a3b8]">Load</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Floating Icons -->
+                    <div class="absolute -top-4 -right-8 glass-circle w-14 h-14 flex items-center justify-center animate-bounce">
+                        <i class="fab fa-aws text-2xl text-[#ff9900]"></i>
+                    </div>
+                    <div class="absolute -bottom-6 -left-6 glass-circle w-12 h-12 flex items-center justify-center" style="animation: float 4s ease-in-out infinite;">
+                        <i class="fab fa-microsoft text-lg text-[#00d4ff]"></i>
+                    </div>
+                    <div class="absolute top-1/2 -right-10 glass-circle w-10 h-10 flex items-center justify-center" style="animation: float 3s ease-in-out infinite 1s;">
+                        <i class="fas fa-snowflake text-lg text-[#29b5e8]"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 px-4 md:px-8 relative z-10">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 montserrat">
+                About <span class="gradient-text">Me</span>
+            </h2>
+            <div class="w-24 h-1 bg-gradient-to-r from-[#00d4ff] to-[#9d4edd] mx-auto mb-12 rounded-full"></div>
+
+            <div class="grid lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2 glass-card p-8">
+                    <h3 class="text-xl font-semibold mb-4 flex items-center gap-2">
+                        <i class="fas fa-user-tie text-[#00d4ff]"></i>
+                        Professional Summary
+                    </h3>
+                    <p class="text-[#94a3b8] leading-relaxed mb-4">
+                        <span class="text-white font-medium">Results-driven Data Engineer with 6.5 years of experience</span> in 
+                        <span class="text-[#00d4ff]">Enterprise data platforms</span>, 
+                        <span class="text-[#9d4edd]">multicloud data solutions</span>, 
+                        <span class="text-[#20c997]">ETL pipeline development</span>, and big data technologies.
+                    </p>
+                    <p class="text-[#94a3b8] leading-relaxed mb-4">
+                        Skilled in designing <span class="text-white">cost-efficient architecture</span>, optimizing data processing workflows, and 
+                        implementing <span class="text-[#00d4ff] font-medium">scalable solutions on Azure and Snowflake</span>. 
+                        Proven ability to enhance performance, automate processes, and drive cloud migrations.
+                    </p>
+                    <p class="text-[#94a3b8] leading-relaxed">
+                        Adept in <span class="text-[#9d4edd] font-medium">Agile methodologies</span>, 
+                        <span class="text-[#20c997] font-medium">CI/CD implementation</span>, and data warehousing, 
+                        with a strong track record of delivering high-impact solutions.
+                    </p>
+
+                    <!-- Awards -->
+                    <div class="mt-6 flex flex-wrap gap-3">
+                        <span class="award-badge">
+                            <i class="fas fa-star"></i> Silver Star Team Award 2024
+                        </span>
+                        <span class="award-badge">
+                            <i class="fas fa-lightbulb"></i> Innovation Nominee 2023
+                        </span>
+                        <span class="award-badge">
+                            <i class="fas fa-trophy"></i> Performance Award (2x)
+                        </span>
+                    </div>
+                </div>
+
+                <div class="glass-card p-8">
+                    <h3 class="text-xl font-semibold mb-4 flex items-center gap-2">
+                        <i class="fas fa-graduation-cap text-[#00d4ff]"></i>
+                        Education
+                    </h3>
+                    <div class="bg-gradient-to-br from-[#00d4ff]/5 to-[#9d4edd]/5 p-5 rounded-xl border border-[#00d4ff]/10">
+                        <div class="flex items-start gap-4">
+                            <div class="glass-circle w-12 h-12 flex items-center justify-center shrink-0">
+                                <i class="fas fa-university text-[#00d4ff]"></i>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-white">B.E. Computer Science</p>
+                                <p class="text-sm text-[#94a3b8]">Madhav Institute of Science & Technology</p>
+                                <p class="text-xs text-[#94a3b8]">Gwalior, MP</p>
+                                <p class="text-xs text-[#94a3b8] mt-1">2015 - 2019</p>
+                                <div class="mt-3 inline-block px-3 py-1 rounded-full bg-[#00d4ff]/20 text-[#00d4ff] text-sm font-medium">
+                                    CGPA: 7.4/10
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-6">
+                        <h4 class="font-medium text-white mb-3 flex items-center gap-2">
+                            <i class="fas fa-map-marker-alt text-[#9d4edd]"></i>
+                            Location
+                        </h4>
+                        <p class="text-[#94a3b8] text-sm">📍 Bangalore, India</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-24 px-4 md:px-8 relative z-10">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 montserrat">
+                Professional <span class="gradient-text">Experience</span>
+            </h2>
+            <div class="w-24 h-1 bg-gradient-to-r from-[#00d4ff] to-[#9d4edd] mx-auto mb-12 rounded-full"></div>
+
+            <div class="timeline">
+                <!-- ThoughtFocus -->
+                <div class="timeline-item">
+                    <div class="glass-card p-8 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-[#00d4ff]/10 to-transparent rounded-bl-full"></div>
+                        
+                        <div class="flex flex-wrap items-start justify-between gap-4 mb-6">
+                            <div>
+                                <div class="flex items-center gap-3 mb-2">
+                                    <span class="px-3 py-1 rounded-full text-xs bg-[#00d4ff]/20 text-[#00d4ff] border border-[#00d4ff]/30">CURRENT</span>
+                                </div>
+                                <h3 class="text-2xl font-bold text-white">Data Engineer</h3>
+                                <p class="text-[#00d4ff] font-medium text-lg">ThoughtFocus, Bangalore</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-[#94a3b8] mono">Mar 2025 - Present</p>
+                            </div>
+                        </div>
+
+                        <ul class="space-y-3 text-[#94a3b8] text-sm">
+                            <li class="flex items-start gap-2">
+                                <i class="fas fa-check text-[#00d4ff] mt-1"></i>
+                                <span>Driving large-scale enterprise platforms with Big Data, PySpark, Databricks & Snowflake</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fas fa-check text-[#00d4ff] mt-1"></i>
+                                <span>Working for top private credit investment firm, transforming data for business needs</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fas fa-check text-[#00d4ff] mt-1"></i>
+                                <span>Designed, built, and scheduled data pipelines in Databricks</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fas fa-check text-[#00d4ff] mt-1"></i>
+                                <span>Submitted proposal for Data Governance setup for client</span>
+                            </li>
+                        </ul>
+
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            <span class="tech-pill spark">Databricks</span>
+                            <span class="tech-pill spark">PySpark</span>
+                            <span class="tech-pill db">Snowflake</span>
+                            <span class="tech-pill azure">Azure</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ecolab -->
+                <div class="timeline-item">
+                    <div class="glass-card p-8 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-[#9d4edd]/10 to-transparent rounded-bl-full"></div>
+                        
+                        <div class="flex flex-wrap items-start justify-between gap-4 mb-6">
+                            <div>
+                                <h3 class="text-2xl font-bold text-white">Data Engineer</h3>
+                                <p class="text-[#9d4edd] font-medium text-lg">Ecolab Digital Center, Bangalore</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-[#94a3b8] mono">Feb 2023 - Mar 2025</p>
+                                <p class="text-sm text-[#94a3b8]">2+ Years</p>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="award-badge"><i class="fas fa-star"></i> Silver Star 2024</span>
+                            <span class="award-badge"><i class="fas fa-lightbulb"></i> Innovation Nominee</span>
+                        </div>
+
+                        <ul class="space-y-3 text-[#94a3b8] text-sm">
+                            <li class="flex items-start gap-2">
+                                <i class="fas fa-check text-[#9d4edd] mt-1"></i>
+                                <span><strong class="text-white">70% cost reduction</strong> in storage & processing for PEST IOT Project</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fas fa-check text-[#9d4edd] mt-1"></i>
+                                <span>Migrated on-prem databases to Snowflake - <strong class="text-white">2x faster orchestration, 98% failure reduction</strong></span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fas fa-check text-[#9d4edd] mt-1"></i>
+                                <span>Developed IOT data pipelines using Databricks, Azure & PySpark</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fas fa-check text-[#9d4edd] mt-1"></i>
+                                <span>Implemented CI/CD with Azure DevOps</span>
+                            </li>
+                        </ul>
+
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            <span class="tech-pill azure">Azure Data Factory</span>
+                            <span class="tech-pill db">Snowflake</span>
+                            <span class="tech-pill spark">Databricks</span>
+                            <span class="tech-pill spark">PySpark</span>
+                            <span class="tech-pill azure">Azure DevOps</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ZS Associates -->
+                <div class="timeline-item">
+                    <div class="glass-card p-8 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-[#20c997]/10 to-transparent rounded-bl-full"></div>
+                        
+                        <div class="flex flex-wrap items-start justify-between gap-4 mb-6">
+                            <div>
+                                <h3 class="text-2xl font-bold text-white">Business Technology Solution Associate</h3>
+                                <p class="text-[#20c997] font-medium text-lg">ZS Associates, Pune</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-[#94a3b8] mono">Mar 2022 - Feb 2023</p>
+                                <p class="text-sm text-[#94a3b8]">1 Year</p>
+                            </div>
+                        </div>
+
+                        <ul class="space-y-3 text-[#94a3b8] text-sm">
+                            <li class="flex items-start gap-2">
+                                <i class="fas fa-check text-[#20c997] mt-1"></i>
+                                <span>Built data pipelines for data lake ingestion using AWS Glue, Python & PySpark</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fas fa-check text-[#20c997] mt-1"></i>
+                                <span><strong class="text-white">Reduced SLA from 9 hours to 35 minutes</strong> for Spark job</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fas fa-check text-[#20c997] mt-1"></i>
+                                <span>Direct engagement with multinational clients for Azure migrations</span>
+                            </li>
+                        </ul>
+
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            <span class="tech-pill aws">AWS Glue</span>
+                            <span class="tech-pill aws">AWS S3</span>
+                            <span class="tech-pill python">Python</span>
+                            <span class="tech-pill spark">PySpark</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- IBM -->
+                <div class="timeline-item">
+                    <div class="glass-card p-8 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-[#4361ee]/10 to-transparent rounded-bl-full"></div>
+                        
+                        <div class="flex flex-wrap items-start justify-between gap-4 mb-6">
+                            <div>
+                                <h3 class="text-2xl font-bold text-white">Data Engineer</h3>
+                                <p class="text-[#4361ee] font-medium text-lg">IBM India Pvt Ltd, Pune</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-[#94a3b8] mono">Jun 2019 - Mar 2022</p>
+                                <p class="text-sm text-[#94a3b8]">~3 Years</p>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="award-badge"><i class="fas fa-trophy"></i> Performance Award (2x)</span>
+                        </div>
+
+                        <ul class="space-y-3 text-[#94a3b8] text-sm">
+                            <li class="flex items-start gap-2">
+                                <i class="fas fa-check text-[#4361ee] mt-1"></i>
+                                <span>Designed Data Warehousing solutions using Informatica & Azure Data Factory</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fas fa-check text-[#4361ee] mt-1"></i>
+                                <span><strong class="text-white">Mentored team of 4</strong> engineers</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fas fa-check text-[#4361ee] mt-1"></i>
+                                <span>Extracted data from Oracle, SQL Server, IBM DB2, SAP, Salesforce, Teradata</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fas fa-check text-[#4361ee] mt-1"></i>
+                                <span>Participated in interviewing and onboarding new team members</span>
+                            </li>
+                        </ul>
+
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            <span class="tech-pill azure">Azure Data Factory</span>
+                            <span class="tech-pill db">Informatica</span>
+                            <span class="tech-pill db">Oracle</span>
+                            <span class="tech-pill db">SQL Server</span>
+                            <span class="tech-pill db">Teradata</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-24 px-4 md:px-8 relative z-10">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 montserrat">
+                Tech <span class="gradient-text">Stack</span>
+            </h2>
+            <div class="w-24 h-1 bg-gradient-to-r from-[#00d4ff] to-[#9d4edd] mx-auto mb-4 rounded-full"></div>
+            <p class="text-center text-[#94a3b8] mb-12">Building scalable data solutions with modern technologies 🚀</p>
+
+            <!-- ETL Visual -->
+            <div class="glass-card p-8 mb-12 max-w-4xl mx-auto">
+                <h3 class="text-center text-xl font-semibold mb-6 gradient-text-purple">My ETL Expertise</h3>
+                <div class="etl-container">
+                    <div class="etl-step etl-extract">
+                        <i class="fas fa-database text-3xl text-[#00d4ff] mb-2"></i>
+                        <p class="font-semibold">Extract</p>
+                        <p class="text-xs text-[#94a3b8]">SQL, S3, APIs</p>
+                    </div>
+                    <span class="etl-arrow"><i class="fas fa-arrow-right"></i></span>
+                    <div class="etl-step etl-transform">
+                        <i class="fas fa-cogs text-3xl text-[#9d4edd] mb-2"></i>
+                        <p class="font-semibold">Transform</p>
+                        <p class="text-xs text-[#94a3b8]">PySpark, Databricks</p>
+                    </div>
+                    <span class="etl-arrow"><i class="fas fa-arrow-right"></i></span>
+                    <div class="etl-step etl-load">
+                        <i class="fas fa-warehouse text-3xl text-[#20c997] mb-2"></i>
+                        <p class="font-semibold">Load</p>
+                        <p class="text-xs text-[#94a3b8]">Snowflake, Redshift</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Data Warehouse Grid -->
+            <div class="glass-card p-6 mb-12 max-w-3xl mx-auto">
+                <h3 class="text-center text-lg font-semibold mb-4 flex items-center justify-center gap-2">
+                    <i class="fas fa-th text-[#00d4ff]"></i>
+                    <span>Technology Matrix</span>
+                </h3>
+                <div class="warehouse-grid">
+                    <div class="warehouse-cell">Databricks</div>
+                    <div class="warehouse-cell">PySpark</div>
+                    <div class="warehouse-cell">Snowflake</div>
+                    <div class="warehouse-cell">Azure ADF</div>
+                    <div class="warehouse-cell">AWS Glue</div>
+                    <div class="warehouse-cell">Airflow</div>
+                    <div class="warehouse-cell">Python</div>
+                    <div class="warehouse-cell">SQL</div>
+                    <div class="warehouse-cell">Redshift</div>
+                    <div class="warehouse-cell">S3</div>
+                    <div class="warehouse-cell">EMR</div>
+                    <div class="warehouse-cell">Athena</div>
+                    <div class="warehouse-cell">Fabric</div>
+                    <div class="warehouse-cell">DevOps</div>
+                    <div class="warehouse-cell">Cosmos DB</div>
+                    <div class="warehouse-cell">Teradata</div>
+                </div>
+            </div>
+
+            <!-- Skill Categories -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Big Data -->
+                <div class="skill-category glass-card p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="glass-circle w-12 h-12 flex items-center justify-center">
+                            <i class="fas fa-server text-xl text-[#e25a1c]"></i>
+                        </div>
+                        <h3 class="font-semibold text-lg">Big Data Technologies</h3>
+                    </div>
+                    <div class="flex flex-wrap">
+                        <span class="tech-pill spark">Databricks</span>
+                        <span class="tech-pill spark">PySpark</span>
+                        <span class="tech-pill db">Snowflake</span>
+                        <span class="tech-pill">Apache Spark</span>
+                    </div>
+                </div>
+
+                <!-- Azure -->
+                <div class="skill-category glass-card p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="glass-circle w-12 h-12 flex items-center justify-center">
+                            <i class="fab fa-microsoft text-xl text-[#00d4ff]"></i>
+                        </div>
+                        <h3 class="font-semibold text-lg">Azure Cloud</h3>
+                    </div>
+                    <div class="flex flex-wrap">
+                        <span class="tech-pill azure">Azure Data Factory</span>
+                        <span class="tech-pill azure">Databricks</span>
+                        <span class="tech-pill azure">Data Lake</span>
+                        <span class="tech-pill azure">Microsoft Fabric</span>
+                        <span class="tech-pill azure">KeyVaults</span>
+                        <span class="tech-pill azure">Azure SQL</span>
+                    </div>
+                </div>
+
+                <!-- AWS -->
+                <div class="skill-category glass-card p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="glass-circle w-12 h-12 flex items-center justify-center">
+                            <i class="fab fa-aws text-xl text-[#ff9900]"></i>
+                        </div>
+                        <h3 class="font-semibold text-lg">AWS Services</h3>
+                    </div>
+                    <div class="flex flex-wrap">
+                        <span class="tech-pill aws">Apache Airflow</span>
+                        <span class="tech-pill aws">EMR</span>
+                        <span class="tech-pill aws">Glue</span>
+                        <span class="tech-pill aws">S3</span>
+                        <span class="tech-pill aws">Athena</span>
+                        <span class="tech-pill aws">Redshift</span>
+                        <span class="tech-pill aws">CloudWatch</span>
+                        <span class="tech-pill aws">Secret Manager</span>
+                    </div>
+                </div>
+
+                <!-- Databases -->
+                <div class="skill-category glass-card p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="glass-circle w-12 h-12 flex items-center justify-center">
+                            <i class="fas fa-database text-xl text-[#20c997]"></i>
+                        </div>
+                        <h3 class="font-semibold text-lg">Databases</h3>
+                    </div>
+                    <div class="flex flex-wrap">
+                        <span class="tech-pill db">Oracle SQL Developer</span>
+                        <span class="tech-pill db">Azure SQL</span>
+                        <span class="tech-pill db">SQL Server</span>
+                        <span class="tech-pill db">Teradata</span>
+                        <span class="tech-pill db">Cosmos DB</span>
+                    </div>
+                </div>
+
+                <!-- Programming & Tools -->
+                <div class="skill-category glass-card p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="glass-circle w-12 h-12 flex items-center justify-center">
+                            <i class="fab fa-python text-xl text-[#3776ab]"></i>
+                        </div>
+                        <h3 class="font-semibold text-lg">Programming & Tools</h3>
+                    </div>
+                    <div class="flex flex-wrap">
+                        <span class="tech-pill python">Python</span>
+                        <span class="tech-pill">SQL</span>
+                        <span class="tech-pill">RDL</span>
+                        <span class="tech-pill">SSIS</span>
+                        <span class="tech-pill">Informatica</span>
+                    </div>
+                </div>
+
+                <!-- CI/CD -->
+                <div class="skill-category glass-card p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="glass-circle w-12 h-12 flex items-center justify-center">
+                            <i class="fas fa-code-branch text-xl text-[#9d4edd]"></i>
+                        </div>
+                        <h3 class="font-semibold text-lg">CI/CD & DevOps</h3>
+                    </div>
+                    <div class="flex flex-wrap">
+                        <span class="tech-pill azure">Azure DevOps</span>
+                        <span class="tech-pill">GitHub</span>
+                        <span class="tech-pill">Agile</span>
+                        <span class="tech-pill">SDLC</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certifications" class="py-24 px-4 md:px-8 relative z-10">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 montserrat">
+                <span class="gradient-text">Certifications</span>
+            </h2>
+            <div class="w-24 h-1 bg-gradient-to-r from-[#00d4ff] to-[#9d4edd] mx-auto mb-12 rounded-full"></div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Azure DP-900 -->
+                <div class="cert-card p-6">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="glass-circle w-16 h-16 flex items-center justify-center">
+                            <i class="fab fa-microsoft text-3xl text-[#00d4ff]"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-white">Microsoft Azure</h3>
+                            <p class="text-[#00d4ff] font-medium">DP-900</p>
+                        </div>
+                    </div>
+                    <p class="text-[#94a3b8] text-sm">Azure Data Fundamentals</p>
+                    <span class="inline-block mt-3 px-3 py-1 cat-azure text-xs rounded-full border">Data Fundamentals</span>
+                </div>
+
+                <!-- Azure AZ-900 -->
+                <div class="cert-card p-6">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="glass-circle w-16 h-16 flex items-center justify-center">
+                            <i class="fab fa-microsoft text-3xl text-[#00d4ff]"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-white">Microsoft Azure</h3>
+                            <p class="text-[#00d4ff] font-medium">AZ-900</p>
+                        </div>
+                    </div>
+                    <p class="text-[#94a3b8] text-sm">Azure Fundamentals</p>
+                    <span class="inline-block mt-3 px-3 py-1 cat-azure text-xs rounded-full border">Cloud Fundamentals</span>
+                </div>
+
+                <!-- Azure AI-900 -->
+                <div class="cert-card p-6">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="glass-circle w-16 h-16 flex items-center justify-center">
+                            <i class="fab fa-microsoft text-3xl text-[#9d4edd]"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-white">Microsoft Azure</h3>
+                            <p class="text-[#9d4edd] font-medium">AI-900</p>
+                        </div>
+                    </div>
+                    <p class="text-[#94a3b8] text-sm">Azure AI Fundamentals</p>
+                    <span class="inline-block mt-3 px-3 py-1 cat-azure text-xs rounded-full border">AI Fundamentals</span>
+                </div>
+
+                <!-- Azure DP-200 -->
+                <div class="cert-card p-6">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="glass-circle w-16 h-16 flex items-center justify-center">
+                            <i class="fas fa-database text-3xl text-[#00d4ff]"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-white">Azure Data Engineering</h3>
+                            <p class="text-[#00d4ff] font-medium">DP-200</p>
+                        </div>
+                    </div>
+                    <p class="text-[#94a3b8] text-sm">Certified by IBM (Nov 2020)</p>
+                    <span class="inline-block mt-3 px-3 py-1 cat-bigdata text-xs rounded-full border">Data Engineering</span>
+                </div>
+
+                <!-- Informatica IICS -->
+                <div class="cert-card p-6">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="glass-circle w-16 h-16 flex items-center justify-center">
+                            <i class="fas fa-cloud text-3xl text-[#ff6600]"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-white">Informatica Cloud</h3>
+                            <p class="text-[#ff6600] font-medium">IICS</p>
+                        </div>
+                    </div>
+                    <p class="text-[#94a3b8] text-sm">Certified by IBM</p>
+                    <span class="inline-block mt-3 px-3 py-1 cat-bigdata text-xs rounded-full border">ETL/Integration</span>
+                </div>
+
+                <!-- Azure AZ-204 -->
+                <div class="cert-card p-6">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="glass-circle w-16 h-16 flex items-center justify-center">
+                            <i class="fas fa-code text-3xl text-[#00d4ff]"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-white">Azure Developer</h3>
+                            <p class="text-[#00d4ff] font-medium">AZ-204</p>
+                        </div>
+                    </div>
+                    <p class="text-[#94a3b8] text-sm">Developing Solutions for Azure (April 2021)</p>
+                    <span class="inline-block mt-3 px-3 py-1 cat-azure text-xs rounded-full border">Development</span>
+                </div>
+
+                <!-- Snowflake -->
+                <div class="cert-card p-6">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="glass-circle w-16 h-16 flex items-center justify-center">
+                            <i class="fas fa-snowflake text-3xl text-[#29b5e8]"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-white">Snowflake</h3>
+                            <p class="text-[#29b5e8] font-medium">Corporate Training</p>
+                        </div>
+                    </div>
+                    <p class="text-[#94a3b8] text-sm">Completed corporate training on Snowflake platform</p>
+                    <span class="inline-block mt-3 px-3 py-1 cat-cloud text-xs rounded-full border">Data Platform</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 px-4 md:px-8 relative z-10">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 montserrat">
+                Let's <span class="gradient-text">Connect</span>
+            </h2>
+            <div class="w-24 h-1 bg-gradient-to-r from-[#00d4ff] to-[#9d4edd] mx-auto mb-12 rounded-full"></div>
+
+            <div class="glass-card p-8 text-center">
+                <p class="text-[#94a3b8] mb-8 text-lg">
+                    I'm always excited to discuss new opportunities, data engineering challenges, 
+                    or just connect with fellow tech enthusiasts!
+                </p>
+
+                <div class="flex flex-wrap justify-center gap-6 mb-8">
+                    <a href="mailto:priseri123@gmail.com" class="glass-card px-6 py-4 flex items-center gap-3 hover:border-[#00d4ff] transition">
+                        <i class="fas fa-envelope text-2xl text-[#00d4ff]"></i>
+                        <div class="text-left">
+                            <p class="text-xs text-[#94a3b8]">Email</p>
+                            <p class="font-medium">priseri123@gmail.com</p>
+                        </div>
+                    </a>
+
+                    <a href="https://www.linkedin.com/in/priyanka-seriwala" target="_blank" class="glass-card px-6 py-4 flex items-center gap-3 hover:border-[#0077b5] transition">
+                        <i class="fab fa-linkedin text-2xl text-[#0077b5]"></i>
+                        <div class="text-left">
+                            <p class="text-xs text-[#94a3b8]">LinkedIn</p>
+                            <p class="font-medium">priyanka-seriwala</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="flex justify-center gap-4">
+                    <a href="mailto:priseri123@gmail.com" class="glass-button px-8 py-3 text-black font-medium">
+                        <i class="fas fa-paper-plane mr-2"></i>Send Message
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-4 md:px-8 text-center relative z-10">
+        <div class="glass-card max-w-7xl mx-auto py-8 px-6">
+            <div class="flex flex-wrap justify-center gap-6 mb-6">
+                <a href="https://www.linkedin.com/in/priyanka-seriwala" target="_blank" class="hover:text-[#0077b5] transition">
+                    <i class="fab fa-linkedin text-2xl"></i>
+                </a>
+                <a href="mailto:priseri123@gmail.com" class="hover:text-[#00d4ff] transition">
+                    <i class="fas fa-envelope text-2xl"></i>
+                </a>
+            </div>
+            <p class="text-[#94a3b8]">
+                <span class="gradient-text font-semibold">Priyanka Seriwala</span>
+            </p>
+            <p class="text-sm text-[#94a3b8] mt-2">Data Engineer • Cloud Solutions • Big Data Expert</p>
+        </div>
+    </footer>
+
+    <script>
+        // Typewriter Effect
+        const titles = ['Data Engineer', 'Big Data Expert', 'Azure Specialist', 'ETL Developer', 'Cloud Architect', 'PySpark Developer'];
+        let titleIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typewriter = document.getElementById('typewriter');
+
+        function type() {
+            const currentTitle = titles[titleIndex];
+            
+            if (isDeleting) {
+                typewriter.textContent = currentTitle.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typewriter.textContent = currentTitle.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            if (!isDeleting && charIndex === currentTitle.length) {
+                setTimeout(() => isDeleting = true, 2000);
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                titleIndex = (titleIndex + 1) % titles.length;
+            }
+
+            setTimeout(type, isDeleting ? 50 : 100);
+        }
+        type();
+
+        // Mobile Menu
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        });
+
+        // Data Particles
+        function createParticles() {
+            const container = document.getElementById('particles');
+            const colors = ['#00d4ff', '#9d4edd', '#20c997'];
+            
+            for (let i = 0; i < 25; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'data-particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (10 + Math.random() * 10) + 's';
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                container.appendChild(particle);
+            }
+        }
+        createParticles();
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.glass-card, .cert-card, .skill-category, .timeline-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Counter Animation
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-number');
+            counters.forEach(counter => {
+                const target = counter.textContent;
+                const isPercentage = target.includes('%');
+                const isPlus = target.includes('+');
+                const numericValue = parseFloat(target);
+                
+                let current = 0;
+                const increment = numericValue / 50;
+                
+                const updateCounter = () => {
+                    if (current < numericValue) {
+                        current += increment;
+                        let display = Math.ceil(current);
+                        if (target.includes('.')) {
+                            display = current.toFixed(1);
+                        }
+                        counter.textContent = display + (isPercentage ? '%' : '') + (isPlus ? '+' : '');
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        counter.textContent = target;
+                    }
+                };
+                updateCounter();
+            });
+        }
+
+        // Trigger counter animation when stats are visible
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounters();
+                    statsObserver.disconnect();
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.stat-number').forEach(el => {
+            statsObserver.observe(el.parentElement);
+        });
+    </script>
 </body>
 </html>
